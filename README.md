@@ -15,7 +15,7 @@ The Appointment app follows best practices in the following areas:
 - **Bootstrap**: Installed Bootstrap 5.3 (`npm i bootstrap@5.3`) for responsive UI design.
 - **UUID**: Integrated `uuid` for unique ID generation (`npm install uuid && npm install --save-dev @types/uuid`).
 
-# Hotel App Snippets
+## Hotel App Snippets
 
 The Hotel app follows best practices in the following areas:
 
@@ -39,7 +39,9 @@ The Hotel app follows best practices in the following areas:
 - **ng-template**: Uses `ng-template` and template references to display conditional messages (e.g., "No reservations").
 - **Unique IDs**: Generates unique IDs using `uuid` or `Date.now().toString()`.
 
-# Hotel App: Asynchronous Modern Web Architecture
+## Hotel App: Asynchronous Modern Web Architecture
+
+Used Mackoon to replicate APIs.
 
 ## Architecture Overview
 - **Database (SQL or NoSQL)** ↔ **Backend Application + RESTful API** ↔ **Frontend Application (Angular, React)**
@@ -81,6 +83,16 @@ this._reservationService.getReservations().subscribe(data => {
     this.reservations = data;
 });
 
-## Mocking API Requests Using Mockoon
+## eCommerce App Snippets
+
+The eCommerce app follows best practices in the following areas:
+
+- **Class Models**: Generated product models using `ng g class models/products`, including default fields such as `id = 0`, `name`, `price`, and `image_url`.
+- **Routing**: Implemented route redirection with `redirectTo` and `pathMatch: 'full'` for proper navigation.
+- **Environment Configuration**: Set `apiUrl` for both development and production environments. Used `ng serve --configuration=development` for development builds.
+- **Angular Material**: Added Angular Material via `ng add @angular/material`. Applied the prebuilt theme `indigo-pink` to `styles.css` with `@import "@angular/material/prebuilt-themes/indigo-pink.css"`.
+- **Responsive Grid**: Utilized `@angular/flex-layout` for a responsive grid system (`npm i @angular/flex-layout`).
+- **Search Functionality**: Added a search bar using input fields to filter products dynamically.
+- **Filter with Dropdown**: Implemented dropdown functionality for filtering products by category, price, or other criteria.
 
 
