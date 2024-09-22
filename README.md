@@ -1,6 +1,6 @@
-# Angular Best Practices
+# Angular Snippets
 
-## Appointment App Best Practices
+## Appointment App Snippets
 
 The Appointment app follows best practices in the following areas:
 
@@ -15,7 +15,7 @@ The Appointment app follows best practices in the following areas:
 - **Bootstrap**: Installed Bootstrap 5.3 (`npm i bootstrap@5.3`) for responsive UI design.
 - **UUID**: Integrated `uuid` for unique ID generation (`npm install uuid && npm install --save-dev @types/uuid`).
 
-## Hotel App Best Practices
+# Hotel App Snippets
 
 The Hotel app follows best practices in the following areas:
 
@@ -38,3 +38,49 @@ The Hotel app follows best practices in the following areas:
 - **Reservation CRUD**: Full CRUD operations for managing reservations using the reservation service.
 - **ng-template**: Uses `ng-template` and template references to display conditional messages (e.g., "No reservations").
 - **Unique IDs**: Generates unique IDs using `uuid` or `Date.now().toString()`.
+
+# Hotel App: Asynchronous Modern Web Architecture
+
+## Architecture Overview
+- **Database (SQL or NoSQL)** ↔ **Backend Application + RESTful API** ↔ **Frontend Application (Angular, React)**
+- The **Frontend** sends HTTP requests to the **Backend**.
+- The **Backend** sends HTTP responses to the **Frontend** with a status code.
+- HTTP requests are asynchronous and fetch data from the database via the backend.
+
+## HTTP Request Types
+- **GET**: Retrieve data
+- **POST**: Submit data
+- **PUT**: Update data
+- **DELETE**: Remove data
+
+## HTTP Status Codes
+- **200**: Success
+- **300**: Redirection
+- **400**: Client errors (e.g., 404 Page Not Found)
+- **500**: Server errors (e.g., Database is down)
+
+## Making HTTP Calls from Angular
+
+1. Add `HttpClientModule` in `app.module.ts`:
+   import { HttpClientModule } from '@angular/common/http';
+2. In the service file;
+	import { HttpClient } from '@angular/common/http';
+	import { Observable } from 'rxjs';
+
+## Observables in Angular
+- Observables allow asynchronous code execution. It enables waiting for the results without blocking other code execution.
+- When a method returns an Observable, any component can subscribe to it to listen for data changes and get notified when the data is available.
+
+### Method Making an HTTP Request Using Observables
+getReservations(): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(this.apiUrl + "/reservations");
+}
+
+### Component Subscribing to the Method
+this._reservationService.getReservations().subscribe(data => {
+    this.reservations = data;
+});
+
+## Mocking API Requests Using Mockoon
+
+
