@@ -95,4 +95,72 @@ The eCommerce app follows best practices in the following areas:
 - **Search Functionality**: Added a search bar using input fields to filter products dynamically.
 - **Filter with Dropdown**: Implemented dropdown functionality for filtering products by category, price, or other criteria.
 
+## Library Management: Reactive Web Apps using NgRx
 
+## Without NgRx
+In a traditional Angular app structure:
+
+- **AppComponent** 
+  - ➔ **CartView Component** <-> **ProductService**
+  - ➔ **ProductList Component** <-> **ProductService**
+    - ➔ **AddToCart**
+
+The **CartView Component** has no state maintained for the **AddToCart** action and doesn't know when something is added to the cart. This creates a problem.
+
+### Issues:
+- Fetching data is required to update the states.
+- Data inconsistency due to dependencies or multiple sources of truth (e.g., multiple services).
+- "Sources of truth" means both services need to know the state of **AddToCart**. Assume both work with **CART**.
+- Complex data flow that is hard to understand, track, and debug.
+
+## Solution: Global State Management with NgRx
+NgRx introduces a **single state** for building web applications, providing a **single source of truth**. It follows a reactive architecture, responding to changes in the state.
+
+NgRx uses the **Flux Pattern** for state management:
+- Create a single state in the app and manage it using NgRx.
+
+### How NgRx Works:
+Previously, data was fetched from a service and shown in the component. The service retrieved the data from the backend.
+
+With NgRx:
+### Part 1:
+- Add something to the cart by dispatching an **ACTION** from the **COMPONENT**.
+- The action is processed by a **REDUCER**, which modifies the **STORE**.
+- The **STORE** changes are spread via **SELECTOR**, updating the subscribed component.
+
+### Part 2:
+- For asynchronous operations like loading data from the database:
+  - Use **EFFECTS** to load the data asynchronously, going through Part 1 starting from an **ACTION**.
+
+### Core Concepts:
+- **STORE**: Holds the application state, but cannot be changed directly. Reducers modify the state. NgRx uses one-way data flow.
+- **ACTIONS**: Events that modify the state in the store.
+- **REDUCERS**: Functions that process actions and modify the state based on the action type (e.g., add to cart, delete from cart, load from the database).
+- **EFFECTS**: Handle asynchronous operations (e.g., fetching data from a server) and trigger new actions (e.g., success or failure).
+
+## One-Way Data Flow in NgRx:
+- **Actions** ➔ **Reducer** ➔ **UpdateState** ➔ **Selectors** share updates.
+
+- **Reducers** process actions and update the state.
+- Components receive updates via **selectors** they are subscribed to.
+- The updated state is automatically passed to the components through selectors.
+
+## NgRx Flow Case Scenario:
+- Display products inside a **COMPONENT** that dispatches an action like **LoadAllProducts**.
+- The action triggers an **EFFECT**, which calls the **SERVICE** to load the products.
+- Once the result is fetched, a new **ACTION** (like success) is dispatched.
+- The **REDUCER** processes the action (e.g., one reducer for products, another for authentication).
+- The state in the **STORE** is updated and shared via **SELECTORS**.
+- Components subscribed to relevant selectors get the updated state.
+
+### Example:
+- **Book Reducer**: Add Book, Remove Book.
+- **User Reducer**: Add User, Remove User, Authorize User.
+- The **Reducer** copies the current state segment, makes changes, and returns the new state. It combines the current state and the action to produce a new state.
+
+## NgRx Setup
+Install NgRx Store and Effects:
+npm install @ngrx/store@16.2 @ngrx/effects@16.2
+
+Install NgRx DevTools for debugging in Chrome, then run;
+npm install @ngrx/store-devtools@16.2.0
