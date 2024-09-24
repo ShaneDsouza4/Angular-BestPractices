@@ -206,7 +206,47 @@ npm install @ngrx/store-devtools@16.2.0
 3. Unit Test HTML
 - Unit test HTML element, to see values were fetched on any event.
 
+# Angular Signals
 
+Angular Signals are wrappers for values that notify consumers when their value changes.
+
+## Example:
+
+- **Normal Variable**: `Price`
+- **Reactive Signal Variable**: `Quantity`
+- **Reactive Signal Variable**: `DarkMode` (Signal as a string)
+  - Changes value and:
+    - Updates consumers
+    - Re-renders the UI
+    - Runs effects
+    - Re-renders UI and runs effects again as necessary
+
+## Key Concepts:
+
+- **Signals can use other signals** (Computed Signals).
+- **Computed Signals** are read-only.
+- **Example of a Computed Signal**:
+  - `Computed Signal = Price * Quantity`
+  - The UI can re-render using this Computed Signal, e.g., for the **Total Price**.
+
+## Why Use Signals?
+
+- Signals improve **change detection**.
+- In **Node.js**, changes are top-down. With **Angular Signals**, you can specify exactly where the changes occur.
+- Provides a **clean reactive alternative** or extension to Observables.
+- Ideal for **reactive UI parts**.
+- **Observables** are still recommended for **HTTP requests**.
+
+## Core Concepts:
+
+- **Creating a Signal**
+- **Setting a Signal Value**
+- **Updating Signal Value** using the current value (using a ternary operator for example).
+- **Adding a Class** to HTML via signals.
+- **Creating an Effect**: Code that runs when the value of a signal changes (similar to a listener).
+- **Computed Signals**: Create unchangeable variables using computed signals.
+- **Accessing Info from App Component**: You can access component data without creating a service.
+- **Signal with Input**: Bind signals to inputs in your component.
 
 
 
