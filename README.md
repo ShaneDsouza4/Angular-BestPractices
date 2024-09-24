@@ -164,3 +164,69 @@ npm install @ngrx/store@16.2 @ngrx/effects@16.2
 
 Install NgRx DevTools for debugging in Chrome, then run;
 npm install @ngrx/store-devtools@16.2.0
+
+## Social Platform - Unit Testing
+
+### Use Case
+
+**Components & Services**:
+- **UserService** ➔ **UserProfileComponent**
+
+### Unit Test Scenarios:
+- Verify that the component renders data correctly.
+- Test if the service method `getUser()` returns the correct data.
+- Validate that the custom pipe returns the expected formatted string.
+
+## Benefits of Unit Testing
+- **Regression Prevention**: Ensures new changes don’t break existing functionality.
+- **Easier Debugging**: Helps identify issues earlier in development.
+- **Refines Code Structure**: Encourages improvements in code design.
+- **Maintainability**: Tests document behavior and intent, making the codebase easier to maintain.
+
+## Tools
+- **Jasmine**: Framework for writing unit tests.
+- **Karma**: Test runner that executes tests and generates reports.
+
+## How to Execute Tests
+- Tests are written in the component specification (`.spec.ts`) file.
+- Run the tests using:
+  ng test (Starts Karma test runner and runs all the tests in the project).
+  ng test --watch=false
+
+## Test Features
+1. Unit test services
+- Unit test if service was created.
+- Unit test if service method returned non empty [{...}]
+
+2. Unit test components
+- Unit test if component was created.
+- Unit test component to check if variable defined.
+- Unit test to see if onInIt fetched initial data.
+
+3. Unit Test HTML
+- Unit test HTML element, to see values were fetched on any event.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
